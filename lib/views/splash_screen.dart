@@ -3,7 +3,7 @@ import 'package:quizzia/navigation/navigation.dart';
 import 'package:quizzia/resources/app_colors.dart';
 import 'package:quizzia/resources/app_images.dart';
 import 'package:quizzia/resources/app_strings.dart';
-import 'package:quizzia/views/onboarding_screen.dart';
+import 'package:quizzia/views/onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

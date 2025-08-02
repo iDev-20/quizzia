@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:quizzia/resources/app_colors.dart';
 
-class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+class AboutMeScreen extends StatefulWidget {
+  const AboutMeScreen({super.key});
 
   @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
+  State<AboutMeScreen> createState() => _AboutMeScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class _AboutMeScreenState extends State<AboutMeScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
