@@ -16,7 +16,9 @@ class MyApp extends StatelessWidget {
       title: 'Quizzia',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+        primarySwatch: Colors.amber,
         useMaterial3: true,
+        fontFamily: 'Raleway'
       ),
       home: const SplashScreen(),
     );
