@@ -28,7 +28,7 @@ class CustomAppButton extends StatelessWidget {
   ButtonStyle getStyle() {
     return ButtonStyle(
       fixedSize: MaterialStateProperty.all(
-        const Size.fromHeight(45),
+        const Size.fromHeight(58),
       ),
       enableFeedback: true,
       overlayColor: MaterialStateColor.resolveWith((states) =>
@@ -76,6 +76,7 @@ class CustomAppButton extends StatelessWidget {
         expand
             ? Expanded(
                 child: TextButton(
+                    style: getStyle(),
                     onPressed: enabled
                         ? () {
                             onTap?.call();
@@ -84,6 +85,7 @@ class CustomAppButton extends StatelessWidget {
                     child: child),
               )
             : TextButton(
+                style: getStyle(),
                 onPressed: enabled
                     ? () {
                         onTap?.call();

@@ -8,7 +8,7 @@ class AppStrings {
   static const onboardingSubTitle =
       "We’ve got various categories of quizzes, including mathematics, science, anime, books, music and so much more. Let’s get started now";
   static const getStarted = 'Get Started';
-  static const byVlickingGetStarted =
+  static const byClickingGetStarted =
       'By clicking Get Started, you agree to our ';
   static const termsOfService = 'Terms of Service ';
   static const and = 'and ';
