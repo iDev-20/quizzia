@@ -203,7 +203,8 @@ class CustomSearchTextFormField extends StatelessWidget {
         autofocus: autofocus,
         cursorColor: AppColors.primaryColor,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.only(top: 4, left: 10, right: 10),
+          contentPadding:
+              const EdgeInsets.only(left: 10, top: 21, right: 10, bottom: 21),
           hintText: hintText ?? AppStrings.searchForAnything,
           hintStyle: const TextStyle(
             color: AppColors.grey200,

@@ -26,7 +26,7 @@ class AppStrings {
   static const sampleAppUser = 'Emmanuel';
   static const searchForAnything = 'Search for anything';
   static const categories = 'Categories';
-  static const seeAll = 'See all';
+  static const seeMore = 'See more';
   static const scoreHistory = 'Score History';
   static const viewAll = 'View all';
   static const youHaveNoScoresRecordedYet =
