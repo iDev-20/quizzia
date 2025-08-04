@@ -40,10 +40,7 @@ class AppPage extends StatelessWidget {
                       child: AppImages.svgBackIcon),
                 ),
           centerTitle: false,
-          title: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: title ?? Text(titleText ?? ''),
-          ),
+          title: title ?? Text(titleText ?? ''),
           titleTextStyle: const TextStyle(
               color: AppColors.black2,
               fontFamily: 'Raleway',
