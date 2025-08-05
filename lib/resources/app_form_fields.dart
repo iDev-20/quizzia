@@ -94,7 +94,7 @@ class _CustomAppTextFormFieldState extends State<CustomAppTextFormField> {
             ),
           ),
           SizedBox(
-            height: 58,
+            height: 52,
             child: TextFormField(
               enabled: widget.enabled,
               autofocus: widget.autofocus,
@@ -106,14 +106,12 @@ class _CustomAppTextFormFieldState extends State<CustomAppTextFormField> {
                   fontWeight: FontWeight.w400),
               decoration: InputDecoration(
                 filled: true,
-                fillColor: !widget.enabled
-                    ? AppColors.grey
-                    : isFocused
-                        ? AppColors.primary50
-                        : AppColors.grey,
+                fillColor: (widget.enabled && isFocused)
+                    ? AppColors.primary50
+                    : AppColors.grey,
                 suffixIcon: widget.suffixWidget,
                 contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 21),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 18),
                 hintText: widget.hintText,
                 hintStyle: const TextStyle(
                   color: AppColors.grey200,
@@ -194,7 +192,7 @@ class CustomSearchTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 58,
+      height: 52,
       decoration: BoxDecoration(
         color: AppColors.grey,
         borderRadius: BorderRadius.circular(8),
@@ -204,7 +202,7 @@ class CustomSearchTextFormField extends StatelessWidget {
         cursorColor: AppColors.primaryColor,
         decoration: InputDecoration(
           contentPadding:
-              const EdgeInsets.only(left: 10, top: 21, right: 10, bottom: 21),
+              const EdgeInsets.symmetric(horizontal: 10, vertical: 18),
           hintText: hintText ?? AppStrings.searchForAnything,
           hintStyle: const TextStyle(
             color: AppColors.grey200,
@@ -332,11 +330,9 @@ class _CustomAppLongTextFormFieldState
                 color: AppColors.black, fontSize: 14, height: 1.5),
             decoration: InputDecoration(
               filled: true,
-              fillColor: !widget.enabled
-                  ? AppColors.grey
-                  : isFocused
-                      ? AppColors.primary50
-                      : AppColors.grey,
+              fillColor: (widget.enabled && isFocused)
+                  ? AppColors.primary50
+                  : AppColors.grey,
               suffixIcon: widget.suffixWidget,
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 21),
