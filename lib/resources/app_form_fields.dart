@@ -4,7 +4,7 @@ import 'package:quizzia/resources/app_colors.dart';
 import 'package:quizzia/resources/app_images.dart';
 import 'package:quizzia/resources/app_strings.dart';
 
-class CustomAppTextFormField extends StatelessWidget {
+class CustomAppTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final String? labelText;
   final String? hintText;
@@ -15,6 +15,7 @@ class CustomAppTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
   final int maxLines;
   final int? maxLength;
   final bool? obscureText;
@@ -35,6 +36,7 @@ class CustomAppTextFormField extends StatelessWidget {
     this.validator,
     this.inputFormatters,
     this.keyboardType,
+    this.textInputAction,
     this.maxLines = 1,
     this.autofocus = false,
     this.maxLength,
@@ -47,52 +49,83 @@ class CustomAppTextFormField extends StatelessWidget {
   });
 
   @override
+  State<CustomAppTextFormField> createState() => _CustomAppTextFormFieldState();
+}
+
+class _CustomAppTextFormFieldState extends State<CustomAppTextFormField> {
+  late FocusNode focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode = FocusNode()
+      ..addListener(() {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final isFocused = focusNode.hasFocus;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           Visibility(
-            visible: labelText != null,
-            child: Text(
-              labelText ?? '',
-              style: const TextStyle(
-                  color: AppColors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500),
+            visible: widget.labelText != null,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                widget.labelText ?? '',
+                style: const TextStyle(
+                    color: AppColors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           ),
           SizedBox(
             height: 58,
             child: TextFormField(
-              enabled: enabled,
-              autofocus: autofocus,
+              enabled: widget.enabled,
+              autofocus: widget.autofocus,
+              focusNode: focusNode,
               cursorColor: AppColors.black,
               style: const TextStyle(
-                color: AppColors.black,
-                fontSize: 14,
-              ),
+                  color: AppColors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400),
               decoration: InputDecoration(
                 filled: true,
-                fillColor: enabled ? AppColors.primary50 : AppColors.grey200,
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.all(14.0),
-                  child: suffixWidget,
-                ),
+                fillColor: !widget.enabled
+                    ? AppColors.grey
+                    : isFocused
+                        ? AppColors.primary50
+                        : AppColors.grey,
+                suffixIcon: widget.suffixWidget,
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 21),
+                hintText: widget.hintText,
                 hintStyle: const TextStyle(
                   color: AppColors.grey200,
                   fontSize: 14,
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: AppColors.primaryColor),
+                  borderSide: const BorderSide(color: AppColors.transparent),
                 ),
                 disabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: AppColors.primaryColor),
+                  borderSide: const BorderSide(color: AppColors.transparent),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -104,12 +137,14 @@ class CustomAppTextFormField extends StatelessWidget {
                       color: AppColors.transparent, width: 2.0),
                 ),
               ),
-              inputFormatters: inputFormatters,
-              keyboardType: keyboardType,
-              validator: validator,
-              controller: controller,
-              onChanged: onChanged,
-              textCapitalization: textCapitalization ?? TextCapitalization.none,
+              inputFormatters: widget.inputFormatters,
+              keyboardType: widget.keyboardType,
+              validator: widget.validator,
+              controller: widget.controller,
+              onChanged: widget.onChanged,
+              textCapitalization:
+                  widget.textCapitalization ?? TextCapitalization.none,
+              textInputAction: widget.textInputAction,
             ),
           ),
         ],
@@ -197,7 +232,7 @@ class CustomSearchTextFormField extends StatelessWidget {
   }
 }
 
-class CustomAppLongTextFormField extends StatelessWidget {
+class CustomAppLongTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final String? labelText;
   final String? hintText;
@@ -208,6 +243,7 @@ class CustomAppLongTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
   final int? minLines;
   final int? maxLines;
   final int? maxLength;
@@ -227,6 +263,7 @@ class CustomAppLongTextFormField extends StatelessWidget {
     this.validator,
     this.inputFormatters,
     this.keyboardType,
+    this.textInputAction,
     this.minLines = 5,
     this.maxLines,
     this.autofocus = false,
@@ -238,50 +275,83 @@ class CustomAppLongTextFormField extends StatelessWidget {
   });
 
   @override
+  State<CustomAppLongTextFormField> createState() =>
+      _CustomAppLongTextFormFieldState();
+}
+
+class _CustomAppLongTextFormFieldState
+    extends State<CustomAppLongTextFormField> {
+  late FocusNode focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode = FocusNode()
+      ..addListener(() {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final isFocused = focusNode.hasFocus;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           Visibility(
-            visible: labelText != null,
-            child: Text(
-              labelText ?? '',
-              style: const TextStyle(
-                  color: AppColors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500),
+            visible: widget.labelText != null,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                widget.labelText ?? '',
+                style: const TextStyle(
+                    color: AppColors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           ),
           TextFormField(
-            enabled: enabled,
-            autofocus: autofocus,
+            minLines: widget.minLines,
+            maxLines: widget.maxLines,
+            autofocus: widget.autofocus,
+            focusNode: focusNode,
             cursorColor: AppColors.black,
             style: const TextStyle(
-              color: AppColors.black,
-              fontSize: 14,
-            ),
+                color: AppColors.black, fontSize: 14, height: 1.5),
             decoration: InputDecoration(
               filled: true,
-              fillColor: enabled ? AppColors.primary50 : AppColors.grey200,
-              suffixIcon: Padding(
-                padding: const EdgeInsets.all(14.0),
-                child: suffixWidget,
-              ),
+              fillColor: !widget.enabled
+                  ? AppColors.grey
+                  : isFocused
+                      ? AppColors.primary50
+                      : AppColors.grey,
+              suffixIcon: widget.suffixWidget,
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 21),
+              hintText: widget.hintText,
+              hintMaxLines: 3,
               hintStyle: const TextStyle(
                 color: AppColors.grey200,
                 fontSize: 14,
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: AppColors.primaryColor),
+                borderSide: const BorderSide(color: AppColors.transparent),
               ),
               disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: AppColors.primaryColor),
+                borderSide: const BorderSide(color: AppColors.transparent),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -293,12 +363,14 @@ class CustomAppLongTextFormField extends StatelessWidget {
                     const BorderSide(color: AppColors.transparent, width: 2.0),
               ),
             ),
-            inputFormatters: inputFormatters,
-            keyboardType: keyboardType,
-            validator: validator,
-            controller: controller,
-            onChanged: onChanged,
-            textCapitalization: textCapitalization ?? TextCapitalization.none,
+            inputFormatters: widget.inputFormatters,
+            keyboardType: widget.keyboardType,
+            validator: widget.validator,
+            controller: widget.controller,
+            onChanged: widget.onChanged,
+            textCapitalization:
+                widget.textCapitalization ?? TextCapitalization.none,
+            textInputAction: widget.textInputAction,
           ),
         ],
       ),
