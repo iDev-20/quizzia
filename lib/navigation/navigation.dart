@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizzia/views/home_page.dart';
+import 'package:quizzia/views/home/home_screen.dart';
 
 class Navigation {
   Navigation._();
@@ -31,7 +31,8 @@ class Navigation {
   static Future navigateToHomePage({required BuildContext context}) {
     return Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (BuildContext context) => const HomePage()),
+        MaterialPageRoute(
+            builder: (BuildContext context) => const HomeScreen()),
         (route) => false);
   }
 }

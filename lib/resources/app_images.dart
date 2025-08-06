@@ -8,18 +8,21 @@ class AppImages {
   static AssetImage appLogo = const AssetImage('assets/images/app_logo.png');
   static AssetImage onboardingImage =
       const AssetImage('assets/images/onboarding_image.png');
+  static AssetImage sampleProfileImage = const AssetImage('assets/images/sample_profile_image.png');
 
   //Svgs
   static SvgPicture svgAnimalIcon =
       SvgPicture.asset('assets/svgs/animal_icon.svg');
   static SvgPicture svgAnimeIcon =
-      SvgPicture.asset('assets/svgs/anime_icon.svg');
+      SvgPicture.asset('assets/svgs/anime_icon.svg', height: 90, width: 90);
   static SvgPicture svgBackIcon = SvgPicture.asset('assets/svgs/back_icon.svg');
-  static SvgPicture svgBookIcon = SvgPicture.asset('assets/svgs/book_icon.svg');
+  static SvgPicture svgBookIcon =
+      SvgPicture.asset('assets/svgs/book_icon.svg', height: 90, width: 90);
   static SvgPicture svgCarIcon = SvgPicture.asset('assets/svgs/car_icon.svg');
   static SvgPicture svgClipboardIcon =
       SvgPicture.asset('assets/svgs/clipboard_icon.svg');
-  static SvgPicture svgFilmIcon = SvgPicture.asset('assets/svgs/film_icon.svg');
+  static SvgPicture svgFilmIcon =
+      SvgPicture.asset('assets/svgs/film_icon.svg', height: 90, width: 90);
   static SvgPicture svgFilterIcon =
       SvgPicture.asset('assets/svgs/filter_icon.svg');
   static SvgPicture svgGameControllerIcon =

@@ -44,7 +44,7 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
   @override
   Widget build(BuildContext context) {
     return AppPage(
-      title: AppStrings.aboutMe,
+      titleText: AppStrings.aboutMe,
       body: Column(
         children: [
           Expanded(

@@ -7,11 +7,13 @@ class AppPage extends StatelessWidget {
   const AppPage(
       {super.key,
       this.backgroundColor = AppColors.white,
+      this.titleText,
       this.title,
       required this.body});
 
   final Color backgroundColor;
-  final String? title;
+  final String? titleText;
+  final Widget? title;
   final Widget body;
 
   @override
@@ -25,18 +27,23 @@ class AppPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: backgroundColor,
           elevation: 0,
-          leading: InkWell(
-            customBorder: const CircleBorder(),
-            onTap: () {
-              FocusManager.instance.primaryFocus?.unfocus();
-              Navigation.back(context: context);
-            },
-            child: Container(
-                padding: const EdgeInsets.only(top: 20, bottom: 20),
-                child: AppImages.svgBackIcon),
-          ),
+          leading: (title != null)
+              ? null
+              : InkWell(
+                  customBorder: const CircleBorder(),
+                  onTap: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    Navigation.back(context: context);
+                  },
+                  child: Container(
+                      padding: const EdgeInsets.only(top: 20, bottom: 20),
+                      child: AppImages.svgBackIcon),
+                ),
           centerTitle: false,
-          title: Text(title ?? ''),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: title ?? Text(titleText ?? ''),
+          ),
           titleTextStyle: const TextStyle(
               color: AppColors.black2,
               fontFamily: 'Raleway',
@@ -44,7 +51,7 @@ class AppPage extends StatelessWidget {
               fontWeight: FontWeight.bold),
           titleSpacing: 0,
         ),
-        body: body,
+        body: SafeArea(child: body),
       ),
     );
   }

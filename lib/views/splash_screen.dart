@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initializeApp() {
     Future.delayed(const Duration(seconds: 2), () {
       if (!mounted) return;
-      Navigation.navigateToScreen(
+      Navigation.navigateToScreenAndClearOnePrevious(
           context: context, screen: const OnboardingScreen());
     });
   }
