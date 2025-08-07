@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   inkwellBorderRadius: BorderRadius.circular(8),
                   onTap: () {},
                   child: Ink(
-                    padding: const EdgeInsets.all(17),
+                    padding: const EdgeInsets.all(14),
                     child: AppImages.svgFilterIcon,
                   ),
                 ),

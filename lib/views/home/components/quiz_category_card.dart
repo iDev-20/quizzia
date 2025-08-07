@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:quizzia/models/ui_models.dart';
 import 'package:quizzia/resources/app_colors.dart';

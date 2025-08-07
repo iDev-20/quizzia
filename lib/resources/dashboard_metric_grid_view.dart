@@ -87,27 +87,13 @@ class DashboardMetricGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (children.isEmpty) return const SizedBox.shrink();
-
-    final rows = <Widget>[];
-    for (int i = 0; i < children.length; i += 2) {
-      final hasSecond = i + 1 < children.length;
-      rows.add(
-        Padding(
-          padding: EdgeInsets.only(top: i == 0 ? 0 : 20),
-          child: Row(
-            children: [
-              Expanded(child: children[i]),
-              const SizedBox(width: 16),
-              Expanded(
-                child: hasSecond ? children[i + 1] : const SizedBox.shrink(),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
-    return Column(children: rows);
+    return GridView.count(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      crossAxisCount: 2,
+      crossAxisSpacing: 16,
+      mainAxisSpacing: 20,
+      children: children,
+    );
   }
 }
