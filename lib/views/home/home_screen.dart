@@ -34,21 +34,24 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return AppPage(
-      title: Row(
-        children: [
-          CircleAvatar(
-            radius: 24,
-            backgroundImage: AppImages.sampleProfileImage,
-          ),
-          const SizedBox(width: 12),
-          const Text(
-            '${AppStrings.hi}, ${AppStrings.sampleAppUser}',
-            style: TextStyle(
-                color: AppColors.black2,
-                fontSize: 16,
-                fontWeight: FontWeight.w600),
-          ),
-        ],
+      title: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 24,
+              backgroundImage: AppImages.sampleProfileImage,
+            ),
+            const SizedBox(width: 12),
+            const Text(
+              '${AppStrings.hi}, ${AppStrings.sampleAppUser}',
+              style: TextStyle(
+                  color: AppColors.black2,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
