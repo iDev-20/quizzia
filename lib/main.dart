@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:quizzia/resources/app_colors.dart';
+import 'package:quizzia/view_models/quiz_difficulty_view_model.dart';
 import 'package:quizzia/views/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => QuizDifficultyViewModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,11 +22,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Quizzia',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
-        primarySwatch: Colors.amber,
-        useMaterial3: false,
-        fontFamily: 'Raleway'
-      ),
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+          primarySwatch: Colors.amber,
+          useMaterial3: false,
+          fontFamily: 'Raleway'),
       home: const SplashScreen(),
     );
   }

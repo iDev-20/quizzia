@@ -8,7 +8,8 @@ class AppImages {
   static AssetImage appLogo = const AssetImage('assets/images/app_logo.png');
   static AssetImage onboardingImage =
       const AssetImage('assets/images/onboarding_image.png');
-  static AssetImage sampleProfileImage = const AssetImage('assets/images/sample_profile_image.png');
+  static AssetImage sampleProfileImage =
+      const AssetImage('assets/images/sample_profile_image.png');
 
   //Svgs
   static SvgPicture svgAnimalIcon =
@@ -33,4 +34,11 @@ class AppImages {
       SvgPicture.asset('assets/svgs/search_icon.svg');
   static SvgPicture svgSportsIcon =
       SvgPicture.asset('assets/svgs/sports_icon.svg');
+  static SvgPicture svgDropdDownIcon =
+      SvgPicture.asset('assets/svgs/dropdown_icon.svg');
+  static SvgPicture svgCloseIcon =
+      SvgPicture.asset('assets/svgs/close_icon.svg');
+  static SvgPicture svgMinusIcon =
+      SvgPicture.asset('assets/svgs/minus_icon.svg');
+  static SvgPicture svgAddIcon = SvgPicture.asset('assets/svgs/add_icon.svg');
 }
