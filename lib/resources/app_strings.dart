@@ -40,4 +40,11 @@ class AppStrings {
   static const vehicles = 'Vehicles';
   static const film = 'Film';
   static const videoGames = 'Video Games';
+  static const quizSettings = 'Quiz Settings';
+  static const howManyQuestionsWouldYouLike = 'How many questions would you like?';
+  static const selectDifficulty = 'Select Difficulty';
+  static const easy = 'Easy';
+  static const medium = 'Medium';
+  static const hard = 'Hard';
+  static const startQuiz = 'Start Quiz';
 }
