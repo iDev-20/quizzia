@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:quizzia/navigation/navigation.dart';
 import 'package:quizzia/resources/app_buttons.dart';
 import 'package:quizzia/resources/app_colors.dart';
@@ -7,6 +8,7 @@ import 'package:quizzia/resources/app_dropdown_field.dart';
 import 'package:quizzia/resources/app_images.dart';
 import 'package:quizzia/resources/app_material.dart';
 import 'package:quizzia/resources/app_strings.dart';
+import 'package:quizzia/view_models/quiz_difficulty_view_model.dart';
 
 class QuizSettingsDialog extends StatefulWidget {
   const QuizSettingsDialog({super.key});
@@ -16,12 +18,6 @@ class QuizSettingsDialog extends StatefulWidget {
 }
 
 class _QuizSettingsDialogState extends State<QuizSettingsDialog> {
-  List<String> difficulties = [
-    AppStrings.easy,
-    AppStrings.medium,
-    AppStrings.hard
-  ];
-
   int quizQuantiity = 5;
 
   @override
@@ -59,12 +55,19 @@ class _QuizSettingsDialogState extends State<QuizSettingsDialog> {
             const SizedBox(height: 26),
             selectQuizSize(),
             const SizedBox(height: 30),
-            CustomAppDropDownField(
-              labelText: AppStrings.selectDifficulty,
-              stringItems: true,
-              items: difficulties,
-              onChanged: (p0) {
-                setState(() {});
+            Consumer<QuizDifficultyViewModel>(
+              builder: (context, quizDifficultyViewModel, child) {
+                return CustomAppDropDownField(
+                  labelText: AppStrings.selectDifficulty,
+                  stringItems: true,
+                  items: quizDifficultyViewModel.difficulties,
+                  valueHolder: quizDifficultyViewModel.selectedDifficulty,
+                  onChanged: (selectedDifficulty) {
+                    if (selectedDifficulty != null) {
+                      quizDifficultyViewModel.setDifficulty(selectedDifficulty);
+                    }
+                  },
+                );
               },
             ),
             const SizedBox(height: 58),
