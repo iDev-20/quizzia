@@ -33,4 +33,6 @@ class AppImages {
       SvgPicture.asset('assets/svgs/search_icon.svg');
   static SvgPicture svgSportsIcon =
       SvgPicture.asset('assets/svgs/sports_icon.svg');
+  static SvgPicture svgDropdDownIcon =
+      SvgPicture.asset('assets/svgs/dropdown_icon.svg');
 }
