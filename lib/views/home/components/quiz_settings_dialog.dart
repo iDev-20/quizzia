@@ -22,6 +22,8 @@ class _QuizSettingsDialogState extends State<QuizSettingsDialog> {
     AppStrings.hard
   ];
 
+  int quizQuantiity = 5;
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -88,11 +90,25 @@ class _QuizSettingsDialogState extends State<QuizSettingsDialog> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            quantityButton(icon: AppImages.svgMinusIcon, onTap: () {}),
+            quantityButton(
+                icon: AppImages.svgMinusIcon,
+                onTap: () {
+                  if (quizQuantiity > 1) {
+                    setState(() {
+                      quizQuantiity--;
+                    });
+                  }
+                }),
             const SizedBox(width: 10),
             quantity(),
             const SizedBox(width: 10),
-            quantityButton(icon: AppImages.svgAddIcon, onTap: () {}),
+            quantityButton(
+                icon: AppImages.svgAddIcon,
+                onTap: () {
+                  setState(() {
+                    quizQuantiity++;
+                  });
+                }),
           ],
         ),
       ],
@@ -125,10 +141,10 @@ class _QuizSettingsDialogState extends State<QuizSettingsDialog> {
           color: AppColors.grey,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: const Text(
-          '5',
+        child: Text(
+          quizQuantiity.toString(),
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
               color: AppColors.black,
               fontSize: 24,
               fontWeight: FontWeight.w500),
