@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:quizzia/models/shared_prefs.dart';
 import 'package:quizzia/models/ui_models.dart';
 import 'package:quizzia/navigation/navigation.dart';
 import 'package:quizzia/resources/app_colors.dart';
@@ -21,6 +22,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    getFirstName();
+  }
+
   TextEditingController searchController = TextEditingController();
 
   final List<QuizCategory> quizCategories = [
@@ -30,6 +37,15 @@ class _HomeScreenState extends State<HomeScreen> {
     QuizCategory(icon: AppImages.svgBookIcon, text: AppStrings.history),
     QuizCategory(icon: AppImages.svgAnimalIcon, text: AppStrings.animals),
   ];
+
+  String? savedFirstName;
+
+  Future<void> getFirstName() async {
+    final firstName = await SharedPrefs.getFirstName();
+    setState(() {
+      savedFirstName = firstName;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundImage: AppImages.sampleProfileImage,
             ),
             const SizedBox(width: 12),
-            const Text(
-              '${AppStrings.hi}, ${AppStrings.sampleAppUser}',
-              style: TextStyle(
+            Text(
+              '${AppStrings.hi}, ${savedFirstName ?? ''}',
+              style: const TextStyle(
                   color: AppColors.black2,
                   fontSize: 16,
                   fontWeight: FontWeight.w600),

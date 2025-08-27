@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzia/models/shared_prefs.dart';
 import 'package:quizzia/navigation/navigation.dart';
 import 'package:quizzia/resources/app_buttons.dart';
 import 'package:quizzia/resources/app_form_fields.dart';
@@ -39,6 +40,12 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
     return firstNameController.text.isNotEmpty &&
         otherNamesController.text.isNotEmpty &&
         descriptionTextController.text.isNotEmpty;
+  }
+
+  Future<void> saveFirstName() async {
+    if (firstNameController.text.isNotEmpty) {
+      await SharedPrefs.saveFirstName(firstNameController.text);
+    }
   }
 
   @override
@@ -83,6 +90,7 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
             child: CustomAppButton(
               enabled: isButtonEnabled,
               onTap: () {
+                saveFirstName();
                 Navigation.navigateToHomePage(context: context);
               },
               child: const Text(AppStrings.submit),
