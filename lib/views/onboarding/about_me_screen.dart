@@ -42,10 +42,22 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
         descriptionTextController.text.isNotEmpty;
   }
 
-  Future<void> saveFirstName() async {
-    if (firstNameController.text.isNotEmpty) {
-      await SharedPrefs.saveFirstName(firstNameController.text);
+  Future<void> saveFirstNameAndContinue() async {
+    String firstName = firstNameController.text.trim();
+    if (firstName.isNotEmpty) {
+      await SharedPrefs.saveFirstName(firstName);
+      await SharedPrefs.setOnboardingComplete();
+
+      if (mounted) {
+        Navigation.navigateToHomePage(context: context);
+      }
     }
+  }
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -89,10 +101,7 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
             padding: const EdgeInsets.fromLTRB(16, 14, 16, 24),
             child: CustomAppButton(
               enabled: isButtonEnabled,
-              onTap: () {
-                saveFirstName();
-                Navigation.navigateToHomePage(context: context);
-              },
+              onTap: saveFirstNameAndContinue,
               child: const Text(AppStrings.submit),
             ),
           ),

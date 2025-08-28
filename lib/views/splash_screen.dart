@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzia/models/shared_prefs.dart';
 import 'package:quizzia/navigation/navigation.dart';
 import 'package:quizzia/resources/app_colors.dart';
 import 'package:quizzia/resources/app_images.dart';
@@ -19,12 +20,19 @@ class _SplashScreenState extends State<SplashScreen> {
     initializeApp();
   }
 
-  void initializeApp() {
-    Future.delayed(const Duration(seconds: 2), () {
-      if (!mounted) return;
-      Navigation.navigateToScreenAndClearOnePrevious(
-          context: context, screen: const OnboardingScreen());
-    });
+  void initializeApp() async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    bool isFirstTime = await SharedPrefs.isFirstTime();
+
+    if (mounted) {
+      if (isFirstTime) {
+        Navigation.navigateToScreenAndClearOnePrevious(
+            context: context, screen: const OnboardingScreen());
+      } else {
+        Navigation.navigateToHomePage(context: context);
+      }
+    }
   }
 
   @override
