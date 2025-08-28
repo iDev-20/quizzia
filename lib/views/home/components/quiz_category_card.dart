@@ -22,7 +22,7 @@ class QuizCategoryCard extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) {
-            return const QuizSettingsDialog();
+            return QuizSettingsDialog(category: quizCategory.text);
           },
         );
       },
