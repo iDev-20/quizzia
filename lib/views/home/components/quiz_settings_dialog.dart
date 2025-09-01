@@ -105,6 +105,7 @@ class _QuizSettingsDialogState extends State<QuizSettingsDialog> {
               onTap: () {
                 final quizDifficultyViewModel =
                     context.read<QuizDifficultyViewModel>();
+                Navigation.back(context: context);
 
                 Navigation.navigateToScreen(
                   context: context,
