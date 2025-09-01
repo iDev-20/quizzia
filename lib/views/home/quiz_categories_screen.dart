@@ -14,6 +14,7 @@ class QuizCategoriesScreen extends StatefulWidget {
 }
 
 class _QuizCategoriesScreenState extends State<QuizCategoriesScreen> {
+  // Todo: Move to separate file or class
   final List<QuizCategory> quizCategories = [
     QuizCategory(
         icon: AppImages.svgMathematicsIcon, text: AppStrings.mathematics),
@@ -31,7 +32,7 @@ class _QuizCategoriesScreenState extends State<QuizCategoriesScreen> {
   Widget build(BuildContext context) {
     return AppPage(
       titleText: AppStrings.quizCategories,
-      body: ListView(
+      body: ListView( //TODO: Remove ListView and make GridView scrollable
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         children: [
           DashboardMetricGridView(

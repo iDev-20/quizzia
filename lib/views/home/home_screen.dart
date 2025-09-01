@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   TextEditingController searchController = TextEditingController();
 
+  // Todo: Move to separate file or class
   final List<QuizCategory> quizCategories = [
     QuizCategory(
         icon: AppImages.svgMathematicsIcon, text: AppStrings.mathematics),

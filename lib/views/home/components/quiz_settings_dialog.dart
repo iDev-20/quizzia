@@ -150,7 +150,6 @@ class _QuizSettingsDialogState extends State<QuizSettingsDialog> {
       ],
     );
   }
-
   Widget quantityButton(
       {required SvgPicture icon, required VoidCallback onTap}) {
     return Expanded(

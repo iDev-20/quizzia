@@ -41,6 +41,7 @@ class CustomAppButton extends StatelessWidget {
         const TextStyle(
           color: AppColors.white,
           fontWeight: FontWeight.w700,
+          //TODO: Add font family
         ),
       ),
       shape: MaterialStateProperty.all(
