@@ -48,4 +48,7 @@ class AppImages {
       SvgPicture.asset('assets/svgs/unselected_circle_check_box.svg');
   static SvgPicture svgSelectedCircleCheckBox =
       SvgPicture.asset('assets/svgs/selected_circle_check_box.svg');
+  static SvgPicture svgExcellentResultIcon = SvgPicture.asset('assets/svgs/excellent_result_icon.svg');
+  static SvgPicture svgVeryGoodResultIcon = SvgPicture.asset('assets/svgs/very_good_result_icon.svg');
+  static SvgPicture svgFailedResultIcon = SvgPicture.asset('assets/svgs/failed_result_icon.svg');
 }

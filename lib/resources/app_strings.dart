@@ -51,4 +51,8 @@ class AppStrings {
   static const sampleQuizTime = '9:41 pm';
   static const sampleQuizDuration = '4 mins';
   static const sampleQuizScore = '8 out of 10';
+  static const quizResult = 'Quiz Result';
+  static const excellent = 'Excellent 🎉';
+  static const veryGood = 'Very Good 👊🏾';
+  static const youFailed = 'You Failed 🙈';
 }

@@ -15,4 +15,6 @@ class AppColors {
   static const Color dottedBorderColor = Color(0xFFDFE1E7);
   static const Color backgroundGrey = Color(0xFFF2F2F2);
   static const Color green = Color(0xFF01742F);
+  static const Color quizResultGreen = Color(0xFF00BC4B);
+  static const Color quizResultRed = Color(0xFFFF0202);
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:quizzia/navigation/navigation.dart';
 import 'package:quizzia/resources/app_buttons.dart';
 import 'package:quizzia/resources/app_colors.dart';
 import 'package:quizzia/resources/app_images.dart';
 import 'package:quizzia/resources/app_material.dart';
 import 'package:quizzia/resources/app_page.dart';
 import 'package:quizzia/resources/app_strings.dart';
+import 'package:quizzia/views/quiz/quiz_result_screen.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -81,8 +83,12 @@ class _QuizScreenState extends State<QuizScreen> {
               onTap: () {},
             ),
             const SizedBox(height: 16),
-            const CustomAppButton(
-              child: Text('Next'),
+            CustomAppButton(
+              onTap: () {
+                Navigation.navigateToScreen(
+                    context: context, screen: const QuizResultScreen());
+              },
+              child: const Text('Next'),
             ),
           ],
         ),
