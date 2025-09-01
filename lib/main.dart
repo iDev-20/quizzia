@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quizzia/resources/app_colors.dart';
+import 'package:quizzia/view_models/about_me_view_model.dart';
 import 'package:quizzia/view_models/quiz_difficulty_view_model.dart';
 import 'package:quizzia/views/splash_screen.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => QuizDifficultyViewModel(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => QuizDifficultyViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AboutMeViewModel(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );
