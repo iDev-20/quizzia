@@ -12,6 +12,7 @@ import 'package:quizzia/resources/app_images.dart';
 import 'package:quizzia/resources/app_material.dart';
 import 'package:quizzia/resources/app_strings.dart';
 import 'package:quizzia/view_models/quiz_difficulty_view_model.dart';
+import 'package:quizzia/views/quiz/quiz_screen.dart';
 
 class QuizSettingsDialog extends StatefulWidget {
   const QuizSettingsDialog({super.key, required this.category});
@@ -101,7 +102,10 @@ class _QuizSettingsDialogState extends State<QuizSettingsDialog> {
             ),
             const SizedBox(height: 58),
             CustomAppButton(
-              onTap: () {},
+              onTap: () {
+                Navigation.navigateToScreen(
+                    context: context, screen: const QuizScreen());
+              },
               child: const Text(AppStrings.startQuiz),
             ),
           ],

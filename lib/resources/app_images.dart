@@ -41,6 +41,11 @@ class AppImages {
   static SvgPicture svgMinusIcon =
       SvgPicture.asset('assets/svgs/minus_icon.svg');
   static SvgPicture svgAddIcon = SvgPicture.asset('assets/svgs/add_icon.svg');
-  static SvgPicture svgClockIcon = SvgPicture.asset('assets/svgs/clock_icon.svg');
+  static SvgPicture svgClockIcon =
+      SvgPicture.asset('assets/svgs/clock_icon.svg');
   static SvgPicture svgFlagIcon = SvgPicture.asset('assets/svgs/flag_icon.svg');
+  static SvgPicture svgUnSelectedCircleCheckBox =
+      SvgPicture.asset('assets/svgs/unselected_circle_check_box.svg');
+  static SvgPicture svgSelectedCircleCheckBox =
+      SvgPicture.asset('assets/svgs/selected_circle_check_box.svg');
 }
