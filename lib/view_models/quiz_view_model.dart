@@ -22,8 +22,8 @@ class QuizViewModel extends ChangeNotifier {
 
     final response = await networkHelper.getData();
 
-    print(response);
-    print(networkHelper.queryParams);
+    // print(response);
+    // print(networkHelper.queryParams);
 
     if (response == null) return [];
 
