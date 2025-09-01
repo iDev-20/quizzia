@@ -47,4 +47,8 @@ class AppStrings {
   static const medium = 'Medium';
   static const hard = 'Hard';
   static const startQuiz = 'Start Quiz';
+  static const entertainment = 'Entertainment';
+  static const sampleQuizTime = '9:41 pm';
+  static const sampleQuizDuration = '4 mins';
+  static const sampleQuizScore = '8 out of 10';
 }

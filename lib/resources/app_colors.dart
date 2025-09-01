@@ -5,6 +5,7 @@ class AppColors {
 
   static const Color primaryColor = Color(0xFFFE950B);
   static const Color primary50 = Color(0xFFFFF6EA);
+  static const Color primary100 = Color(0xFFFFF1E0);
   static const Color black = Colors.black;
   static const Color white = Colors.white;
   static const Color transparent = Colors.transparent;
@@ -13,4 +14,5 @@ class AppColors {
   static const Color grey200 = Color(0xFFABB0BC);
   static const Color dottedBorderColor = Color(0xFFDFE1E7);
   static const Color backgroundGrey = Color(0xFFF2F2F2);
+  static const Color green = Color(0xFF01742F);
 }

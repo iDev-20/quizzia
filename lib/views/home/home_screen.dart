@@ -1,4 +1,3 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:quizzia/models/shared_prefs.dart';
 import 'package:quizzia/models/ui_models.dart';
@@ -11,6 +10,8 @@ import 'package:quizzia/resources/app_page.dart';
 import 'package:quizzia/resources/app_strings.dart';
 import 'package:quizzia/resources/dashboard_metric_grid_view.dart';
 import 'package:quizzia/views/home/components/quiz_category_card.dart';
+import 'package:quizzia/views/home/components/score_history_card.dart';
+import 'package:quizzia/views/home/components/score_history_empty_state.dart';
 import 'package:quizzia/views/home/components/section_header.dart';
 import 'package:quizzia/views/home/quiz_categories_screen.dart';
 
@@ -114,25 +115,8 @@ class _HomeScreenState extends State<HomeScreen> {
               action: AppStrings.viewAll,
               onTap: () {}),
           const SizedBox(height: 10),
-          DottedBorder(
-            color: AppColors.dottedBorderColor,
-            borderType: BorderType.RRect,
-            radius: const Radius.circular(12),
-            dashPattern: const [8, 8],
-            padding: const EdgeInsets.symmetric(horizontal: 66, vertical: 59),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AppImages.svgClipboardIcon,
-                const SizedBox(height: 10),
-                const Text(
-                  AppStrings.youHaveNoScoresRecordedYet,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: AppColors.grey200, height: 1.5),
-                ),
-              ],
-            ),
-          ),
+          // const ScoreHistoryEmptyState(),
+          const ScoreHistoryCard()
         ],
       ),
     );

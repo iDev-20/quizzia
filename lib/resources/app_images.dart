@@ -41,4 +41,6 @@ class AppImages {
   static SvgPicture svgMinusIcon =
       SvgPicture.asset('assets/svgs/minus_icon.svg');
   static SvgPicture svgAddIcon = SvgPicture.asset('assets/svgs/add_icon.svg');
+  static SvgPicture svgClockIcon = SvgPicture.asset('assets/svgs/clock_icon.svg');
+  static SvgPicture svgFlagIcon = SvgPicture.asset('assets/svgs/flag_icon.svg');
 }
