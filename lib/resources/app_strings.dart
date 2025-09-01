@@ -41,7 +41,8 @@ class AppStrings {
   static const film = 'Film';
   static const videoGames = 'Video Games';
   static const quizSettings = 'Quiz Settings';
-  static const howManyQuestionsWouldYouLike = 'How many questions would you like?';
+  static const howManyQuestionsWouldYouLike =
+      'How many questions would you like?';
   static const selectDifficulty = 'Select Difficulty';
   static const easy = 'Easy';
   static const medium = 'Medium';
@@ -55,4 +56,8 @@ class AppStrings {
   static const excellent = 'Excellent 🎉';
   static const veryGood = 'Very Good 👊🏾';
   static const youFailed = 'You Failed 🙈';
+  static const timeOut = 'Time Out ⏰';
+  static const timeOutMessage =
+      'You could not finish before within the time. Try to speed up next time';
+  static const okay = 'Okay';
 }
