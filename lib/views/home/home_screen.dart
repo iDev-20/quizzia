@@ -9,6 +9,7 @@ import 'package:quizzia/resources/app_material.dart';
 import 'package:quizzia/resources/app_page.dart';
 import 'package:quizzia/resources/app_strings.dart';
 import 'package:quizzia/resources/dashboard_metric_grid_view.dart';
+import 'package:quizzia/view_models/quiz_view_model.dart';
 import 'package:quizzia/views/home/components/quiz_category_card.dart';
 import 'package:quizzia/views/home/components/score_history_card.dart';
 import 'package:quizzia/views/home/components/score_history_empty_state.dart';

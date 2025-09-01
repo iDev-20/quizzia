@@ -6,3 +6,34 @@ class QuizCategory {
 
   QuizCategory({required this.icon, required this.text});
 }
+
+class Question {
+  final String question;
+  final List<dynamic> options;
+  final String correctAnswer;
+  final String category;
+  final String difficulty;
+
+  Question({
+    required this.question,
+    required this.options,
+    required this.correctAnswer,
+    required this.category,
+    required this.difficulty,
+  });
+
+  factory Question.fromJson(Map<String, dynamic> json) {
+    final allOptions = [
+      ...List<dynamic>.from(json['incorrect_answers'] ?? []),
+      json['correct_answer'] ?? ''
+    ];
+
+    return Question(
+      question: json['question'] ?? '',
+      options: allOptions..shuffle(),
+      correctAnswer: json['correct_answer'] ?? '',
+      category: json['category'] ?? '',
+      difficulty: json['difficulty'] ?? '',
+    );
+  }
+}

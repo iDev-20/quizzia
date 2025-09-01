@@ -103,8 +103,17 @@ class _QuizSettingsDialogState extends State<QuizSettingsDialog> {
             const SizedBox(height: 58),
             CustomAppButton(
               onTap: () {
+                final quizDifficultyViewModel =
+                    context.read<QuizDifficultyViewModel>();
+
                 Navigation.navigateToScreen(
-                    context: context, screen: const QuizScreen());
+                  context: context,
+                  screen: QuizScreen(
+                    amount: quizQuantiity.toString(),
+                    category: widget.category,
+                    difficulty: quizDifficultyViewModel.selectedDifficulty,
+                  ),
+                );
               },
               child: const Text(AppStrings.startQuiz),
             ),
