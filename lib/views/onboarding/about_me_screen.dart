@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:quizzia/models/shared_prefs.dart';
 import 'package:quizzia/navigation/navigation.dart';
-import 'package:quizzia/resources/app_buttons.dart';
-import 'package:quizzia/resources/app_form_fields.dart';
-import 'package:quizzia/resources/app_page.dart';
+import 'package:quizzia/components/app_buttons.dart';
+import 'package:quizzia/components/app_form_fields.dart';
+import 'package:quizzia/components/app_page.dart';
 import 'package:quizzia/resources/app_strings.dart';
+import 'package:quizzia/view_models/about_me_view_model.dart';
 
 class AboutMeScreen extends StatefulWidget {
   const AboutMeScreen({super.key});
@@ -14,50 +16,12 @@ class AboutMeScreen extends StatefulWidget {
 }
 
 class _AboutMeScreenState extends State<AboutMeScreen> {
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController otherNamesController = TextEditingController();
-  TextEditingController descriptionTextController = TextEditingController();
-
-  bool isButtonEnabled = false;
+  late AboutMeViewModel viewModel;
 
   @override
   void initState() {
     super.initState();
-    firstNameController.addListener((onTextFieldChanged));
-    otherNamesController.addListener((onTextFieldChanged));
-    descriptionTextController.addListener((onTextFieldChanged));
-  }
-
-  void onTextFieldChanged() {
-    if (enableButton() != isButtonEnabled) {
-      setState(() {
-        isButtonEnabled = enableButton();
-      });
-    }
-  }
-
-  bool enableButton() {
-    return firstNameController.text.isNotEmpty &&
-        otherNamesController.text.isNotEmpty &&
-        descriptionTextController.text.isNotEmpty;
-  }
-
-  Future<void> saveFirstNameAndContinue() async {
-    String firstName = firstNameController.text.trim();
-    if (firstName.isNotEmpty) {
-      await SharedPrefs.saveFirstName(firstName);
-      await SharedPrefs.setOnboardingComplete();
-
-      if (mounted) {
-        Navigation.navigateToHomePage(context: context);
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    firstNameController.dispose();
-    super.dispose();
+    viewModel = context.read<AboutMeViewModel>();
   }
 
   @override
@@ -73,36 +37,51 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
                 CustomAppTextFormField(
                   labelText: AppStrings.enterYourFirstName,
                   hintText: AppStrings.firstName,
-                  controller: firstNameController,
                   textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
+                  onChanged: (value) {
+                    viewModel.updateFirstName(value);
+                  },
                 ),
                 CustomAppTextFormField(
                   labelText: AppStrings.enterYourOtherNames,
                   hintText: AppStrings.otherNames,
-                  controller: otherNamesController,
                   textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
+                  onChanged: (value) {
+                    viewModel.updateOtherNames(value);
+                  },
                 ),
                 CustomAppLongTextFormField(
                   labelText: AppStrings.describeYourself,
                   hintText: AppStrings.brieflyDescribeYourself,
-                  controller: descriptionTextController,
                   textCapitalization: TextCapitalization.sentences,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
+                  onChanged: (value) {
+                    viewModel.updateDescription(value);
+                  },
                 ),
               ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 14, 16, 24),
-            child: CustomAppButton(
-              enabled: isButtonEnabled,
-              onTap: saveFirstNameAndContinue,
-              child: const Text(AppStrings.submit),
+            child: Consumer<AboutMeViewModel>(
+              builder: (context, vm, _) {
+                return CustomAppButton(
+                  enabled: vm.isButtonEnabled,
+                  onTap: () async {
+                    vm.saveDetailsToCache();
+                    await SharedPrefs.setOnboardingComplete();
+                    // ignore: use_build_context_synchronously
+                    Navigation.navigateToHomePage(context: context);
+                  },
+                  child: const Text(AppStrings.submit),
+                );
+              },
             ),
           ),
         ],

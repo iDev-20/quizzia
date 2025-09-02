@@ -1,18 +1,21 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:quizzia/models/shared_prefs.dart';
 import 'package:quizzia/navigation/navigation.dart';
-import 'package:quizzia/resources/app_buttons.dart';
+import 'package:quizzia/components/app_buttons.dart';
 import 'package:quizzia/resources/app_colors.dart';
-import 'package:quizzia/resources/app_dropdown_field.dart';
+import 'package:quizzia/components/app_dropdown_field.dart';
 import 'package:quizzia/resources/app_images.dart';
-import 'package:quizzia/resources/app_material.dart';
+import 'package:quizzia/components/app_material.dart';
 import 'package:quizzia/resources/app_strings.dart';
+<<<<<<< HEAD
 import 'package:quizzia/view_models/quiz_difficulty_view_model.dart';
 import 'package:quizzia/views/quiz/quiz_screen.dart';
+=======
+import 'package:quizzia/view_models/quiz_settings_view_model.dart';
+import 'package:quizzia/views/home/components/quiz_dialog_components.dart';
+>>>>>>> bea6293b596ecf312715382f7aa5aafddd63754c
 
 class QuizSettingsDialog extends StatefulWidget {
   const QuizSettingsDialog({super.key, required this.category});
@@ -24,30 +27,17 @@ class QuizSettingsDialog extends StatefulWidget {
 }
 
 class _QuizSettingsDialogState extends State<QuizSettingsDialog> {
+  late final QuizSettingsViewModel viewModel;
+
   @override
   void initState() {
     super.initState();
-    loadPreviousSettings();
+    viewModel = context.read<QuizSettingsViewModel>();
+    initializeSettings();
   }
 
-  int quizQuantiity = 5;
-
-  Future<void> loadPreviousSettings() async {
-    try {
-      int savedQuantity = await SharedPrefs.getQuizQuantity(widget.category);
-
-      if (mounted) {
-        setState(() {
-          quizQuantiity = savedQuantity;
-        });
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> saveQuizQuantitySettings() async {
-    await SharedPrefs.saveQuizQuantity(widget.category, quizQuantiity);
+  Future<void> initializeSettings() async {
+    await viewModel.ensureInitialized(widget.category);
   }
 
   @override
@@ -60,6 +50,7 @@ class _QuizSettingsDialogState extends State<QuizSettingsDialog> {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+<<<<<<< HEAD
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -199,6 +190,60 @@ class _QuizSettingsDialogState extends State<QuizSettingsDialog> {
               fontSize: 24,
               fontWeight: FontWeight.w500),
         ),
+=======
+        child:
+            Consumer<QuizSettingsViewModel>(builder: (context, viewModel, _) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    AppStrings.quizSettings,
+                    style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  AppMaterial(
+                      customBorder: const CircleBorder(),
+                      onTap: () {
+                        Navigation.back(context: context);
+                      },
+                      child: AppImages.svgCloseIcon)
+                ],
+              ),
+              const SizedBox(height: 26),
+              QuizSizeSelector(
+                canDecrease: viewModel.canDecrease,
+                canIncrease: viewModel.canIncrease,
+                quizQuantity: viewModel.quizQuantity,
+                onDecrease: () => viewModel.decreaseQuantity(widget.category),
+                onIncrease: () => viewModel.increaseQuantity(widget.category),
+              ),
+              const SizedBox(height: 30),
+              CustomAppDropDownField(
+                labelText: AppStrings.selectDifficulty,
+                stringItems: true,
+                items: viewModel.difficulties,
+                valueHolder: viewModel.selectedDifficulty,
+                onChanged: (selectedDifficulty) {
+                  if (selectedDifficulty != null) {
+                    viewModel.setDifficulty(selectedDifficulty);
+                  }
+                },
+              ),
+              const SizedBox(height: 58),
+              CustomAppButton(
+                onTap: () {},
+                child: const Text(AppStrings.startQuiz),
+              ),
+            ],
+          );
+        }),
+>>>>>>> bea6293b596ecf312715382f7aa5aafddd63754c
       ),
     );
   }

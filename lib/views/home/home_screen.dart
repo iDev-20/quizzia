@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:quizzia/models/shared_prefs.dart';
+import 'package:provider/provider.dart';
 import 'package:quizzia/models/ui_models.dart';
 import 'package:quizzia/navigation/navigation.dart';
 import 'package:quizzia/resources/app_colors.dart';
-import 'package:quizzia/resources/app_form_fields.dart';
+import 'package:quizzia/components/app_form_fields.dart';
 import 'package:quizzia/resources/app_images.dart';
-import 'package:quizzia/resources/app_material.dart';
-import 'package:quizzia/resources/app_page.dart';
+import 'package:quizzia/components/app_material.dart';
+import 'package:quizzia/components/app_page.dart';
 import 'package:quizzia/resources/app_strings.dart';
-import 'package:quizzia/resources/dashboard_metric_grid_view.dart';
+import 'package:quizzia/components/dashboard_metric_grid_view.dart';
+import 'package:quizzia/view_models/home_view_model.dart';
 import 'package:quizzia/views/home/components/quiz_category_card.dart';
 import 'package:quizzia/views/home/components/score_history_empty_state.dart';
 import 'package:quizzia/views/home/components/section_header.dart';
@@ -22,14 +23,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController searchController = TextEditingController();
+  late HomeViewModel viewModel;
+
   @override
   void initState() {
     super.initState();
-    getFirstName();
+    viewModel = context.read<HomeViewModel>();
   }
 
-  TextEditingController searchController = TextEditingController();
-
+  // Todo: Move to separate file or class
   final List<QuizCategory> quizCategories = [
     QuizCategory(
         icon: AppImages.svgMathematicsIcon, text: AppStrings.mathematics),
@@ -37,15 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
     QuizCategory(icon: AppImages.svgBookIcon, text: AppStrings.history),
     QuizCategory(icon: AppImages.svgAnimalIcon, text: AppStrings.animals),
   ];
-
-  String? savedFirstName;
-
-  Future<void> getFirstName() async {
-    final firstName = await SharedPrefs.getFirstName();
-    setState(() {
-      savedFirstName = firstName;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(width: 12),
             Text(
-              '${AppStrings.hi}, ${savedFirstName ?? ''}',
+              '${AppStrings.hi}, ${viewModel.firstName}',
               style: const TextStyle(
                   color: AppColors.black2,
                   fontSize: 16,
@@ -87,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(8),
                   inkwellBorderRadius: BorderRadius.circular(8),
                   onTap: () {},
-                  child: Ink(
+                  child: Padding(
                     padding: const EdgeInsets.all(14),
                     child: AppImages.svgFilterIcon,
                   ),
