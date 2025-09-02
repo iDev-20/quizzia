@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+import 'package:quizzia/ux/shared/components/app_rich_text.dart';
+import 'package:quizzia/ux/navigation/navigation.dart';
+import 'package:quizzia/ux/shared/components/app_buttons.dart';
+import 'package:quizzia/ux/shared/resources/app_colors.dart';
+import 'package:quizzia/ux/shared/resources/app_images.dart';
+import 'package:quizzia/ux/shared/resources/app_strings.dart';
+import 'package:quizzia/ux/views/onboarding/about_me_screen.dart';
+
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      body: SafeArea(
+        child: Padding(
+          padding:
+              const EdgeInsets.only(left: 16, top: 10, right: 16, bottom: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.44,
+                      child: Image(image: AppImages.onboardingImage),
+                    ),
+                    const SizedBox(height: 24),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        AppStrings.onboardingTitle,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppColors.black2,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        AppStrings.onboardingSubTitle,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black2, height: 1.7),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              CustomAppButton(
+                onTap: () {
+                  Navigation.navigateToScreen(
+                      context: context, screen: const AboutMeScreen());
+                },
+                child: const Text(AppStrings.getStarted),
+              ),
+              const SizedBox(height: 16),
+              const AppRichText(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

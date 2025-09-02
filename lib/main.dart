@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizzia/resources/app_colors.dart';
-import 'package:quizzia/view_models/about_me_view_model.dart';
-import 'package:quizzia/view_models/home_view_model.dart';
-import 'package:quizzia/view_models/quiz_settings_view_model.dart';
-import 'package:quizzia/view_models/quiz_state_view_model.dart';
-import 'package:quizzia/view_models/quiz_view_model.dart';
-import 'package:quizzia/views/splash_screen.dart';
+import 'package:quizzia/ux/shared/resources/app_colors.dart';
+import 'package:quizzia/ux/shared/view_models/about_me_view_model.dart';
+import 'package:quizzia/ux/shared/view_models/home_view_model.dart';
+import 'package:quizzia/ux/shared/view_models/quiz_settings_view_model.dart';
+import 'package:quizzia/ux/shared/view_models/quiz_state_view_model.dart';
+import 'package:quizzia/ux/shared/view_models/quiz_view_model.dart';
+import 'package:quizzia/ux/views/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
