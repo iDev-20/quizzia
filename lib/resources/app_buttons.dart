@@ -39,10 +39,9 @@ class CustomAppButton extends StatelessWidget {
       ),
       textStyle: MaterialStateProperty.all(
         const TextStyle(
-          color: AppColors.white,
-          fontWeight: FontWeight.w700,
-          //TODO: Add font family
-        ),
+            color: AppColors.white,
+            fontWeight: FontWeight.w700,
+            fontFamily: 'Raleway'),
       ),
       shape: MaterialStateProperty.all(
         RoundedRectangleBorder(

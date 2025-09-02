@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quizzia/models/shared_prefs.dart';
 import 'package:quizzia/navigation/navigation.dart';
 import 'package:quizzia/resources/app_buttons.dart';
 import 'package:quizzia/resources/app_form_fields.dart';
@@ -39,8 +40,8 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
                   textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
-                  onChanged: (val){
-                    viewModel.updateFirstName(val);
+                  onChanged: (value) {
+                    viewModel.updateFirstName(value);
                   },
                 ),
                 CustomAppTextFormField(
@@ -49,8 +50,8 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
                   textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
-                  onChanged: (val){
-                    viewModel.updateOtherNames(val);
+                  onChanged: (value) {
+                    viewModel.updateOtherNames(value);
                   },
                 ),
                 CustomAppLongTextFormField(
@@ -59,8 +60,8 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
                   textCapitalization: TextCapitalization.sentences,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
-                  onChanged: (val){
-                    viewModel.updateDescription(val);
+                  onChanged: (value) {
+                    viewModel.updateDescription(value);
                   },
                 ),
               ],
@@ -72,13 +73,15 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
               builder: (context, vm, _) {
                 return CustomAppButton(
                   enabled: vm.isButtonEnabled,
-                  onTap: (){
+                  onTap: () async {
                     vm.saveDetailsToCache();
+                    await SharedPrefs.setOnboardingComplete();
+                    // ignore: use_build_context_synchronously
                     Navigation.navigateToHomePage(context: context);
                   },
                   child: const Text(AppStrings.submit),
                 );
-              }
+              },
             ),
           ),
         ],

@@ -32,18 +32,14 @@ class _QuizCategoriesScreenState extends State<QuizCategoriesScreen> {
   Widget build(BuildContext context) {
     return AppPage(
       titleText: AppStrings.quizCategories,
-      body: ListView( //TODO: Remove ListView and make GridView scrollable
+      body: DashboardMetricGridView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-        children: [
-          DashboardMetricGridView(
-            children: quizCategories
-                .map(
-                  (quizCategory) =>
-                      QuizCategoryCard(quizCategory: quizCategory),
-                )
-                .toList(),
-          ),
-        ],
+        physics: const AlwaysScrollableScrollPhysics(),
+        children: quizCategories
+            .map(
+              (quizCategory) => QuizCategoryCard(quizCategory: quizCategory),
+            )
+            .toList(),
       ),
     );
   }
