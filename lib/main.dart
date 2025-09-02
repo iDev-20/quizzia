@@ -4,6 +4,8 @@ import 'package:quizzia/resources/app_colors.dart';
 import 'package:quizzia/view_models/about_me_view_model.dart';
 import 'package:quizzia/view_models/home_view_model.dart';
 import 'package:quizzia/view_models/quiz_settings_view_model.dart';
+import 'package:quizzia/view_models/quiz_state_view_model.dart';
+import 'package:quizzia/view_models/quiz_view_model.dart';
 import 'package:quizzia/views/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,6 +18,8 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (context) => QuizSettingsViewModel()),
         ChangeNotifierProvider(create: (context) => AboutMeViewModel()),
         ChangeNotifierProvider(create: (context) => HomeViewModel(pref: pref)),
+        ChangeNotifierProvider(create: (context) => QuizViewModel()),
+        ChangeNotifierProvider(create: (context) => QuizStateViewModel()),
       ],
       child: const MyApp(),
     ),

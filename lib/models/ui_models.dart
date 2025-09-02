@@ -3,8 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 class QuizCategory {
   final SvgPicture icon;
   final String text;
+  final int categoryId;
 
-  QuizCategory({required this.icon, required this.text});
+  QuizCategory({required this.icon, required this.text, required this.categoryId});
 }
 
 class Question {

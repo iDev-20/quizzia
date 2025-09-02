@@ -13,20 +13,36 @@ class QuizSettingsViewModel extends ChangeNotifier {
   int _quizQuantity = 5;
   String? _currentCategory;
   bool isInitialized = false;
+  String? _categoryId;
 
   bool get canDecrease => quizQuantity > 1;
   bool get canIncrease => quizQuantity < 20;
+  String get categoryId => _categoryId ?? '';
 
   int get quizQuantity {
     return _quizQuantity;
   }
 
-  Future<void> ensureInitialized(String category) async {
-    if (_currentCategory == category && isInitialized) {
+  String get apiDifficulty {
+    switch (selectedDifficulty) {
+      case AppStrings.easy:
+        return 'easy';
+      case AppStrings.medium:
+        return 'medium';
+      case AppStrings.hard:
+        return 'hard';
+      default:
+        return 'easy';
+    }
+  }
+
+  Future<void> ensureInitialized(String categoryId) async {
+    if (_categoryId == categoryId && isInitialized) {
       return;
     }
 
-    _currentCategory = category;
+    _categoryId = categoryId;
+    // _currentCategory = category;
     await loadPreviousSettings();
     isInitialized = true;
   }
@@ -81,7 +97,7 @@ class QuizSettingsViewModel extends ChangeNotifier {
     await ensureInitialized(category);
     return {
       'category': category,
-      'difficulty': selectedDifficulty,
+      'difficulty': apiDifficulty,
       'quantity': _quizQuantity,
     };
   }

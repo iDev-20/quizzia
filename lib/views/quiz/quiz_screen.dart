@@ -1,104 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:quizzia/models/ui_models.dart';
+import 'package:provider/provider.dart';
+import 'package:quizzia/components/app_page.dart';
 import 'package:quizzia/navigation/navigation.dart';
-import 'package:quizzia/resources/app_page.dart';
-import 'package:quizzia/view_models/quiz_view_model.dart';
+import 'package:quizzia/view_models/quiz_state_view_model.dart';
 import 'package:quizzia/views/quiz/components/quiz_contents.dart';
 import 'package:quizzia/views/quiz/components/small_quiz_components.dart';
 import 'package:quizzia/views/quiz/quiz_result_screen.dart';
 
 class QuizScreen extends StatefulWidget {
-  const QuizScreen(
-      {super.key,
-      required this.amount,
-      required this.category,
-      required this.difficulty});
-
-  final String amount;
-  final String category;
-  final String difficulty;
+  const QuizScreen({super.key});
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  late Future<List<Question>> questionsFuture;
-  int currentQuestionIndex = 0;
-  String? selectedAnswer;
-
   @override
   void initState() {
     super.initState();
-    currentQuestionIndex = 0;
-    selectedAnswer = null;
-    questionsFuture = QuizViewModel().getQuestions(
-      amount: widget.amount,
-      category: widget.category,
-      difficulty: widget.difficulty.toLowerCase(),
-    );
-  }
-
-  void selectAnswer(String answer) {
-    setState(() {
-      selectedAnswer = answer;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<QuizStateViewModel>().loadQuestions();
     });
   }
 
-  void nextQuestion(List<Question> questions) {
-    if (currentQuestionIndex < questions.length - 1) {
-      setState(() {
-        currentQuestionIndex++;
-        selectedAnswer = null;
-      });
+  void nextQuestion() {
+    final viewModel = context.read<QuizStateViewModel>();
+    if (viewModel.currentQuestionIndex < viewModel.questions.length - 1) {
+      viewModel.nextQuestion();
     } else {
       Navigation.navigateToScreen(
-        context: context,
-        screen: const QuizResultScreen(),
-      );
+          context: context, screen: const QuizResultScreen());
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return AppPage(
-      titleText: '${widget.category} Quiz',
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-        child: FutureBuilder<List<Question>>(
-          future: questionsFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const LoadingWidget();
-            }
-
-            if (snapshot.hasError) {
-              return AppErrorWidget(error: snapshot.error.toString());
-            }
-
-            final questions = snapshot.data ?? [];
-
-            if (questions.isEmpty || currentQuestionIndex >= questions.length) {
-              return const EmptyStateWidget();
-            }
-            final currentQuestion = questions[currentQuestionIndex];
-            double progress = (currentQuestionIndex + 1) / questions.length;
-
-            return QuizContent(
-              question: currentQuestion,
-              progress: progress,
-              currentIndex: currentQuestionIndex,
-              totalQuestions: questions.length,
-              selectedAnswer: selectedAnswer,
-              onAnswerSelected: selectAnswer,
-              onNext: () {
-                nextQuestion(questions);
-              },
-              hasSelectedAnswer: selectedAnswer != null,
-            );
-          },
+    return Consumer<QuizStateViewModel>(builder: (context, quizStateVM, _) {
+      return AppPage(
+        titleText: '${quizStateVM.categoryName} Quiz',
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+          child: buildContent(quizStateVM),
         ),
-      ),
+      );
+    });
+  }
+
+  Widget buildContent(QuizStateViewModel viewModel) {
+    if (viewModel.isLoading) {
+      return const LoadingWidget();
+    }
+
+    if (!viewModel.hasQuestions) {
+      return const EmptyStateWidget();
+    }
+
+    final currentQuestion = viewModel.questions[viewModel.currentQuestionIndex];
+    final selectedAnswer =
+        viewModel.userAnswers[viewModel.currentQuestionIndex];
+
+    return QuizContent(
+      question: currentQuestion,
+      progress: viewModel.progress,
+      currentIndex: viewModel.currentQuestionIndex,
+      totalQuestions: viewModel.questions.length,
+      selectedAnswer: selectedAnswer.isNotEmpty ? selectedAnswer : null,
+      onAnswerSelected: (answer) => viewModel.setAnswer(answer),
+      onNext: nextQuestion,
+      hasSelectedAnswer: selectedAnswer.isNotEmpty,
     );
   }
 }

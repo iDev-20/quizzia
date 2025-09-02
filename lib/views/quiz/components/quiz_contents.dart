@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quizzia/components/app_buttons.dart';
 import 'package:quizzia/models/ui_models.dart';
-import 'package:quizzia/resources/app_buttons.dart';
 import 'package:quizzia/views/quiz/components/quiz_header.dart';
 import 'package:quizzia/views/quiz/components/small_quiz_components.dart';
 

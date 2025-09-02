@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizzia/models/ui_models.dart';
 import 'package:quizzia/navigation/navigation.dart';
 import 'package:quizzia/resources/app_colors.dart';
 import 'package:quizzia/components/app_form_fields.dart';
+import 'package:quizzia/resources/app_constants.dart';
 import 'package:quizzia/resources/app_images.dart';
 import 'package:quizzia/components/app_material.dart';
 import 'package:quizzia/components/app_page.dart';
@@ -31,15 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     viewModel = context.read<HomeViewModel>();
   }
-
-  // Todo: Move to separate file or class
-  final List<QuizCategory> quizCategories = [
-    QuizCategory(
-        icon: AppImages.svgMathematicsIcon, text: AppStrings.mathematics),
-    QuizCategory(icon: AppImages.svgSportsIcon, text: AppStrings.sports),
-    QuizCategory(icon: AppImages.svgBookIcon, text: AppStrings.history),
-    QuizCategory(icon: AppImages.svgAnimalIcon, text: AppStrings.animals),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
               }),
           const SizedBox(height: 20),
           DashboardMetricGridView(
-            children: quizCategories
+            children: AppConstants.quizCategories
+                .take(4)
                 .map((quizCategory) =>
                     QuizCategoryCard(quizCategory: quizCategory))
                 .toList(),
