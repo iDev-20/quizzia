@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quizzia/resources/app_colors.dart';
 import 'package:quizzia/resources/app_images.dart';
-import 'package:quizzia/resources/app_material.dart';
+import 'package:quizzia/components/app_material.dart';
 import 'package:quizzia/resources/app_strings.dart';
 
 class QuizQuantityButton extends StatelessWidget {

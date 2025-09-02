@@ -4,12 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:quizzia/models/ui_models.dart';
 import 'package:quizzia/navigation/navigation.dart';
 import 'package:quizzia/resources/app_colors.dart';
-import 'package:quizzia/resources/app_form_fields.dart';
+import 'package:quizzia/components/app_form_fields.dart';
 import 'package:quizzia/resources/app_images.dart';
-import 'package:quizzia/resources/app_material.dart';
-import 'package:quizzia/resources/app_page.dart';
+import 'package:quizzia/components/app_material.dart';
+import 'package:quizzia/components/app_page.dart';
 import 'package:quizzia/resources/app_strings.dart';
-import 'package:quizzia/resources/dashboard_metric_grid_view.dart';
+import 'package:quizzia/components/dashboard_metric_grid_view.dart';
 import 'package:quizzia/view_models/home_view_model.dart';
 import 'package:quizzia/views/home/components/quiz_category_card.dart';
 import 'package:quizzia/views/home/components/section_header.dart';
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(8),
                   inkwellBorderRadius: BorderRadius.circular(8),
                   onTap: () {},
-                  child: Ink(
+                  child: Padding(
                     padding: const EdgeInsets.all(14),
                     child: AppImages.svgFilterIcon,
                   ),

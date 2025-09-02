@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizzia/components/app_rich_text.dart';
 import 'package:quizzia/navigation/navigation.dart';
-import 'package:quizzia/resources/app_buttons.dart';
+import 'package:quizzia/components/app_buttons.dart';
 import 'package:quizzia/resources/app_colors.dart';
 import 'package:quizzia/resources/app_images.dart';
 import 'package:quizzia/resources/app_strings.dart';

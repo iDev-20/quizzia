@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quizzia/models/ui_models.dart';
 import 'package:quizzia/resources/app_images.dart';
-import 'package:quizzia/resources/app_page.dart';
+import 'package:quizzia/components/app_page.dart';
 import 'package:quizzia/resources/app_strings.dart';
-import 'package:quizzia/resources/dashboard_metric_grid_view.dart';
+import 'package:quizzia/components/dashboard_metric_grid_view.dart';
 import 'package:quizzia/views/home/components/quiz_category_card.dart';
 
 class QuizCategoriesScreen extends StatefulWidget {

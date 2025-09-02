@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quizzia/models/shared_prefs.dart';
 import 'package:quizzia/navigation/navigation.dart';
-import 'package:quizzia/resources/app_buttons.dart';
-import 'package:quizzia/resources/app_form_fields.dart';
-import 'package:quizzia/resources/app_page.dart';
+import 'package:quizzia/components/app_buttons.dart';
+import 'package:quizzia/components/app_form_fields.dart';
+import 'package:quizzia/components/app_page.dart';
 import 'package:quizzia/resources/app_strings.dart';
 import 'package:quizzia/view_models/about_me_view_model.dart';
 

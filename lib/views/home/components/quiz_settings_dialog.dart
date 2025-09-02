@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quizzia/navigation/navigation.dart';
-import 'package:quizzia/resources/app_buttons.dart';
+import 'package:quizzia/components/app_buttons.dart';
 import 'package:quizzia/resources/app_colors.dart';
-import 'package:quizzia/resources/app_dropdown_field.dart';
+import 'package:quizzia/components/app_dropdown_field.dart';
 import 'package:quizzia/resources/app_images.dart';
-import 'package:quizzia/resources/app_material.dart';
+import 'package:quizzia/components/app_material.dart';
 import 'package:quizzia/resources/app_strings.dart';
 import 'package:quizzia/view_models/quiz_settings_view_model.dart';
 import 'package:quizzia/views/home/components/quiz_dialog_components.dart';
