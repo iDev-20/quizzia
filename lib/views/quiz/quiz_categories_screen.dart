@@ -3,7 +3,7 @@ import 'package:quizzia/resources/app_constants.dart';
 import 'package:quizzia/components/app_page.dart';
 import 'package:quizzia/resources/app_strings.dart';
 import 'package:quizzia/components/dashboard_metric_grid_view.dart';
-import 'package:quizzia/views/home/components/quiz_category_card.dart';
+import 'package:quizzia/views/quiz/components/quiz_category_card.dart';
 
 class QuizCategoriesScreen extends StatefulWidget {
   const QuizCategoriesScreen({super.key});

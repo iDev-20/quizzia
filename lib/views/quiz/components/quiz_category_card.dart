@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quizzia/models/ui_models.dart';
 import 'package:quizzia/resources/app_colors.dart';
 import 'package:quizzia/components/app_material.dart';
-import 'package:quizzia/views/home/components/quiz_settings_dialog.dart';
+import 'package:quizzia/views/quiz/components/quiz_settings_dialog.dart';
 
 class QuizCategoryCard extends StatelessWidget {
   const QuizCategoryCard({

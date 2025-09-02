@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quizzia/models/ui_models.dart';
 import 'package:quizzia/resources/app_colors.dart';
 import 'package:quizzia/resources/app_images.dart';
 import 'package:quizzia/resources/app_strings.dart';
 
 class ScoreHistoryCard extends StatelessWidget {
-  const ScoreHistoryCard({super.key});
+  const ScoreHistoryCard({super.key, required this.result});
+
+  final QuizResult result;
 
   @override
   Widget build(BuildContext context) {
@@ -26,22 +29,22 @@ class ScoreHistoryCard extends StatelessWidget {
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        AppStrings.entertainment,
+                        result.categoryName,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: AppColors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w500),
                       ),
-                      Text(
+                      const Text(
                         AppStrings.sampleQuizTime,
                         style: TextStyle(
                             color: AppColors.primaryColor,
@@ -49,10 +52,10 @@ class ScoreHistoryCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
-                    AppStrings.easy,
-                    style: TextStyle(
+                    result.difficulty,
+                    style: const TextStyle(
                       color: AppColors.primaryColor,
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -81,9 +84,9 @@ class ScoreHistoryCard extends StatelessWidget {
                     ),
                   ),
                   iconBox(icon: AppImages.svgFlagIcon),
-                  const Text(
-                    AppStrings.sampleQuizScore,
-                    style: TextStyle(
+                  Text(
+                    '${result.correctAnswersCount} of ${result.totalQuestionsCount}',
+                    style: const TextStyle(
                         color: AppColors.green, fontWeight: FontWeight.w500),
                   ),
                 ],

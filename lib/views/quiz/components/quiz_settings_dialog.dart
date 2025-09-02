@@ -12,7 +12,7 @@ import 'package:quizzia/resources/app_strings.dart';
 import 'package:quizzia/view_models/quiz_settings_view_model.dart';
 import 'package:quizzia/view_models/quiz_state_view_model.dart';
 import 'package:quizzia/view_models/quiz_view_model.dart';
-import 'package:quizzia/views/home/components/quiz_dialog_components.dart';
+import 'package:quizzia/views/quiz/components/quiz_dialog_components.dart';
 import 'package:quizzia/views/quiz/quiz_screen.dart';
 
 class QuizSettingsDialog extends StatefulWidget {

@@ -5,7 +5,8 @@ class QuizCategory {
   final String text;
   final int categoryId;
 
-  QuizCategory({required this.icon, required this.text, required this.categoryId});
+  QuizCategory(
+      {required this.icon, required this.text, required this.categoryId});
 }
 
 class Question {
@@ -37,4 +38,33 @@ class Question {
       difficulty: json['difficulty'] ?? '',
     );
   }
+}
+
+class QuestionResult {
+  final String question;
+  final String userAnswer;
+  final bool isCorrect;
+
+  QuestionResult(
+      {required this.question,
+      required this.userAnswer,
+      required this.isCorrect});
+}
+
+class QuizResult {
+  final String categoryName;
+  final String difficulty;
+  final int correctAnswersCount;
+  final int totalQuestionsCount;
+  final DateTime? date;
+  final Duration? duration;
+
+  QuizResult({
+    required this.categoryName,
+    required this.difficulty,
+    required this.correctAnswersCount,
+    required this.totalQuestionsCount,
+    this.date,
+    this.duration,
+  });
 }

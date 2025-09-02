@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quizzia/navigation/navigation.dart';
 import 'package:quizzia/resources/app_colors.dart';
-import 'package:quizzia/components/app_form_fields.dart';
 import 'package:quizzia/resources/app_constants.dart';
 import 'package:quizzia/resources/app_images.dart';
-import 'package:quizzia/components/app_material.dart';
 import 'package:quizzia/components/app_page.dart';
 import 'package:quizzia/resources/app_strings.dart';
 import 'package:quizzia/components/dashboard_metric_grid_view.dart';
 import 'package:quizzia/view_models/home_view_model.dart';
-import 'package:quizzia/views/home/components/quiz_category_card.dart';
+import 'package:quizzia/view_models/quiz_state_view_model.dart';
+import 'package:quizzia/views/home/score_history_page.dart';
+import 'package:quizzia/views/quiz/components/quiz_category_card.dart';
+import 'package:quizzia/views/home/components/score_history_card.dart';
 import 'package:quizzia/views/home/components/score_history_empty_state.dart';
+import 'package:quizzia/views/home/components/search_widget.dart';
 import 'package:quizzia/views/home/components/section_header.dart';
-import 'package:quizzia/views/home/quiz_categories_screen.dart';
+import 'package:quizzia/views/quiz/quiz_categories_screen.dart';
+import 'package:quizzia/views/home/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,7 +26,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController searchController = TextEditingController();
   late HomeViewModel viewModel;
 
   @override
@@ -57,28 +59,12 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: CustomSearchTextFormField(
-                  hintText: AppStrings.searchForAnything,
-                  controller: searchController,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: AppMaterial(
-                  color: AppColors.grey,
-                  borderRadius: BorderRadius.circular(8),
-                  inkwellBorderRadius: BorderRadius.circular(8),
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(14),
-                    child: AppImages.svgFilterIcon,
-                  ),
-                ),
-              ),
-            ],
+          SearchWidget(
+            enabled: false,
+            onTap: () {
+              Navigation.navigateToScreen(
+                  context: context, screen: const SearchScreen());
+            },
           ),
           SectionHeader(
               header: AppStrings.categories,
@@ -98,10 +84,23 @@ class _HomeScreenState extends State<HomeScreen> {
           SectionHeader(
               header: AppStrings.scoreHistory,
               action: AppStrings.viewAll,
-              onTap: () {}),
+              onTap: () {
+                Navigation.navigateToScreen(
+                    context: context, screen: const ScoreHistoryPage());
+              }),
           const SizedBox(height: 10),
-          const ScoreHistoryEmptyState(),
-          // const ScoreHistoryCard()
+          Consumer<QuizStateViewModel>(
+            builder: (context, viewModel, _) {
+              return viewModel.completedQuiz
+                  ? Column(
+                      children: viewModel.scoreHistory
+                          .take(3)
+                          .map((quiz) => ScoreHistoryCard(result: quiz))
+                          .toList(),
+                    )
+                  : const ScoreHistoryEmptyState();
+            },
+          ),
         ],
       ),
     );
