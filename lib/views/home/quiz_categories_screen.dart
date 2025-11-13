@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quizzia/models/ui_models.dart';
 import 'package:quizzia/resources/app_images.dart';
-import 'package:quizzia/resources/app_page.dart';
+import 'package:quizzia/components/app_page.dart';
 import 'package:quizzia/resources/app_strings.dart';
-import 'package:quizzia/resources/dashboard_metric_grid_view.dart';
+import 'package:quizzia/components/dashboard_metric_grid_view.dart';
 import 'package:quizzia/views/home/components/quiz_category_card.dart';
 
 class QuizCategoriesScreen extends StatefulWidget {
@@ -14,6 +14,7 @@ class QuizCategoriesScreen extends StatefulWidget {
 }
 
 class _QuizCategoriesScreenState extends State<QuizCategoriesScreen> {
+  // Todo: Move to separate file or class
   final List<QuizCategory> quizCategories = [
     QuizCategory(
         icon: AppImages.svgMathematicsIcon, text: AppStrings.mathematics),
@@ -31,18 +32,14 @@ class _QuizCategoriesScreenState extends State<QuizCategoriesScreen> {
   Widget build(BuildContext context) {
     return AppPage(
       titleText: AppStrings.quizCategories,
-      body: ListView(
+      body: DashboardMetricGridView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-        children: [
-          DashboardMetricGridView(
-            children: quizCategories
-                .map(
-                  (quizCategory) =>
-                      QuizCategoryCard(quizCategory: quizCategory),
-                )
-                .toList(),
-          ),
-        ],
+        physics: const AlwaysScrollableScrollPhysics(),
+        children: quizCategories
+            .map(
+              (quizCategory) => QuizCategoryCard(quizCategory: quizCategory),
+            )
+            .toList(),
       ),
     );
   }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quizzia/models/ui_models.dart';
 import 'package:quizzia/resources/app_colors.dart';
-import 'package:quizzia/resources/app_material.dart';
+import 'package:quizzia/components/app_material.dart';
+import 'package:quizzia/views/home/components/quiz_settings_dialog.dart';
 
 class QuizCategoryCard extends StatelessWidget {
   const QuizCategoryCard({
@@ -17,7 +18,15 @@ class QuizCategoryCard extends StatelessWidget {
       color: AppColors.primary50,
       borderRadius: BorderRadius.circular(16),
       inkwellBorderRadius: BorderRadius.circular(16),
-      child: Ink(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return QuizSettingsDialog(category: quizCategory.text);
+          },
+        );
+      },
+      child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

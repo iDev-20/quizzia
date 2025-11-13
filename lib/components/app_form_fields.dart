@@ -357,7 +357,7 @@ class _CustomAppLongTextFormFieldState
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(4),
                 borderSide:
-                    const BorderSide(color: AppColors.transparent, width: 2.0),
+                    const BorderSide(color: AppColors.transparent),
               ),
             ),
             inputFormatters: widget.inputFormatters,

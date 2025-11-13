@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quizzia/components/tappable_text.dart';
 import 'package:quizzia/resources/app_colors.dart';
-import 'package:quizzia/resources/app_material.dart';
 
 class SectionHeader extends StatelessWidget {
   const SectionHeader(
@@ -27,16 +27,12 @@ class SectionHeader extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.bold),
           ),
-          AppMaterial(
-            inkwellBorderRadius: BorderRadius.circular(8),
+          TappableText(
+            text: action,
             onTap: onTap,
-            child: Ink(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-              child: Text(
-                action,
-                style: const TextStyle(
-                    color: AppColors.primaryColor, fontWeight: FontWeight.w600),
-              ),
+            textStyle: const TextStyle(
+              color: AppColors.primaryColor,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],
